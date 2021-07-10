@@ -39,6 +39,7 @@ export default class Expense extends Component {
                 <TextArea  h={10} placeholder="Catagory like clothes, bills, communications, eating out etc.." />
             </Stack>
 
+
           </NativeBaseProvider>
           </View>
 
@@ -50,7 +51,7 @@ export default class Expense extends Component {
                 variant="outline"
                 colorScheme="secondary"
                 onPress={()=>{
-                  this.props.navigation.navigate('New Expense')
+                  
               }}
               >
                 EXPENSE
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
   balanceBox: {
     width: 320,
     height: 95,
-    backgroundColor: '#2ecc71',
+    backgroundColor: '#e74c3c',
     marginTop: 50,
     marginLeft: 55
   }
