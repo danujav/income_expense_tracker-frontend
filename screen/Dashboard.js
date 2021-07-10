@@ -1,6 +1,14 @@
-import { Button, ButtonGroup } from 'native-base';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import {
+  Button,
+  Divider,
+  Heading,
+  VStack,
+  Stack,
+  Center,
+  NativeBaseProvider,
+} from "native-base"
 
 
 export default class  extends Component {
@@ -22,17 +30,38 @@ export default class  extends Component {
             <Text style={styles.balanceText}> Balance </Text>
             <Text style={styles.balanceText}> 15000 </Text>
           </View>
+          
         </View>
 
         <View style={styles.secondView}>
-        <Button
-          size="sm"
-          variant="outline"
-          colorScheme="secondary"
-          onPress={() => console.log("hello world")}
-        >
-          SECONDARY
-        </Button>
+          <View>
+            <NativeBaseProvider>
+              <Button
+                style={styles.button}
+                size="lg"
+                variant="outline"
+                colorScheme="secondary"
+                onPress={() => console.log("hello world")}
+              >
+                EXPENSE
+              </Button>
+            </NativeBaseProvider>
+          </View>
+
+          <View>
+            <NativeBaseProvider>
+              <Button
+                style={styles.button2}
+                size="lg"
+                variant="outline"
+                colorScheme="success"
+                onPress={() => console.log("hello world")}
+                >
+                INCOME
+              </Button>
+            </NativeBaseProvider>
+          </View>
+
         </View>
         
         
@@ -52,6 +81,8 @@ const styles = StyleSheet.create({
   },
   secondView: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: '#3498db'
   },
   text: {
@@ -92,5 +123,23 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 30,
     textAlign: 'center'
-  }
+  },
+  button: {
+    marginTop: 40,
+    marginLeft: 30,
+    borderRadius: 500,
+    width: 115,
+    height: 115,
+    color: 'white',
+    fontWeight: 'bold'
+  },
+  button2: {
+    marginTop: 40,
+    marginLeft: 5,
+    borderRadius: 500,
+    width: 115,
+    height: 115,
+    color: 'white',
+    fontWeight: 'bold'
+  },
 })
