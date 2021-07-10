@@ -15,7 +15,49 @@ export default class  extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      income: '',
+      expense: '',
+      balance: ''
     };
+    this.getTotalIncome()
+    this.getTotalExpense()
+    this.getTotalBalance()
+  }
+
+  getTotalBalance() {
+    var balanceTot = this.state.income - this.state.expense
+    console.log(this.state.income)
+    console.log('hi')
+  }
+
+  getTotalIncome() {
+    fetch('http://192.168.1.103:9000/income')
+  .then((response) => response.json())
+  .then((json) => this.calculateIncome(json))
+  }
+
+  calculateIncome(json) {
+    var totIncome = 0;
+    for(let i = 0; i < json.length; i++) {
+      totIncome += json[i].amount
+    }
+    /* console.log(totIncome) */
+    this.setState({income: totIncome})
+  }
+
+  getTotalExpense() {
+    fetch('http://192.168.1.103:9000/expense')
+  .then((response) => response.json())
+  .then((json) => this.calculateExpense(json))
+  }
+
+  calculateExpense(json) {
+    var totExpense = 0;
+    for(let i = 0; i < json.length; i++) {
+      totExpense += json[i].amount
+    }
+    /* console.log(totIncome) */
+    this.setState({expense: totExpense})
   }
 
   render() {
@@ -23,12 +65,12 @@ export default class  extends Component {
       <View style={styles.container}>
         <View style={styles.firstView}>
           <Text style={styles.text}> Income </Text>
-          <Text style={styles.incomeAmount}> 20000 </Text>
+          <Text style={styles.incomeAmount}> {this.state.income} </Text>
           <Text style={styles.text}> Expense </Text>
-          <Text style={styles.expenseAmount}> 5000 </Text>
+          <Text style={styles.expenseAmount}> {this.state.expense} </Text>
           <View style={styles.balanceBox}>
             <Text style={styles.balanceText}> Balance </Text>
-            <Text style={styles.balanceText}> 15000 </Text>
+            <Text style={styles.balanceText}> {this.state.income - this.state.expense} </Text>
           </View>
           
         </View>
