@@ -41,7 +41,9 @@ export default class  extends Component {
                 size="lg"
                 variant="outline"
                 colorScheme="secondary"
-                onPress={() => console.log("hello world")}
+                onPress={()=>{
+                  this.props.navigation.navigate('Expense')
+              }}
               >
                 EXPENSE
               </Button>
@@ -55,7 +57,9 @@ export default class  extends Component {
                 size="lg"
                 variant="outline"
                 colorScheme="success"
-                onPress={() => console.log("hello world")}
+                onPress={()=>{
+                  this.props.navigation.navigate('Income')
+              }}
                 >
                 INCOME
               </Button>
