@@ -52,22 +52,33 @@ export default class App extends Component {
     Alert.alert('Credentials', `${username} + ${password}`);
   } */
 
+  backToLogin(json) {
+    if(json != null) {
+      this.props.navigation.replace('Login')
+    }
+  }
+
   render() {
     return (      
       <NativeBaseProvider>
-        
-        
-        
+    
       <View style={styles.container}>
       <Image
           style={styles.backgroundImage}
           source={require('../assets/svg.png')}
         />
-        <View style={{marginBottom: 200}}>
+        <View style={{marginBottom: 100}}>
         <TextInput
           value={this.state.email}
           onChangeText={(email) => this.setState({ email })}
            label='Email'
+          style={styles.input}
+        />
+
+        <TextInput
+          value={this.state.username}
+          onChangeText={(username) => this.setState({ username })}
+           label='Name'
           style={styles.input}
         />
 
@@ -80,7 +91,7 @@ export default class App extends Component {
         />
 
          <Button
-                /* style={styles.button} */
+                style={styles.button}
                 size="lg"
                /*  variant="outline" */
                 colorScheme="primary"
@@ -99,25 +110,28 @@ export default class App extends Component {
                     
                   })
                     .then((response) => response.json())
-                    .then((json) => console.log(json));
-                  
-                  this.props.navigation.replace('Dashboard')
+                    .then((json) => this.backToLogin(json)
+                    );
+
+                    
+                    
               }}
               >
-                Log in
+                Sign in
               </Button>
-          </View>
-          <Text style={{marginBottom:30, fontSize:20}}>Don't you have an account?</Text>
-          <Button
+              
+              </View>
+              <Text style={{marginBottom:30, fontSize:20}}>Already have an account?</Text>
+              <Button
                 style={styles.button1}
                 size="lg"
                /*  variant="outline" */
                 colorScheme="primary"
                 onPress={()=>{
-                  this.props.navigation.replace('Signup')
+                  this.props.navigation.replace('Login')
                 }}
               >
-                Sign in
+                Log in
               </Button>
       </View>
       </NativeBaseProvider>
@@ -158,10 +172,10 @@ const styles = StyleSheet.create({
   button1: {
     marginTop: -15,
     marginBottom: 30,
-    marginLeft: -15,
+    marginLeft: -13,
     width: 115,
     height: 45,
     color: 'white',
     fontWeight: 'bold'
-  }
+  } 
 });
