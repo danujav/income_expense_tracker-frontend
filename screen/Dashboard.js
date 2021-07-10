@@ -42,7 +42,7 @@ export default class  extends Component {
                 variant="outline"
                 colorScheme="secondary"
                 onPress={()=>{
-                  this.props.navigation.navigate('Expense')
+                  this.props.navigation.navigate('New Expense')
               }}
               >
                 EXPENSE
@@ -58,7 +58,7 @@ export default class  extends Component {
                 variant="outline"
                 colorScheme="success"
                 onPress={()=>{
-                  this.props.navigation.navigate('Income')
+                  this.props.navigation.navigate('New Income')
               }}
                 >
                 INCOME

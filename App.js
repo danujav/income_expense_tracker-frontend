@@ -23,8 +23,8 @@ export default class App extends Component {
         <Stack.Navigator>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="Income" component={Income} />
-          <Stack.Screen name="Expense" component={Expense} />
+          <Stack.Screen name="New Income" component={Income} />
+          <Stack.Screen name="New Expense" component={Expense} />
         </Stack.Navigator>
       </NavigationContainer>
     );
