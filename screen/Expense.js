@@ -6,6 +6,10 @@ export default class Expense extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dates: '',
+      amount: '',
+      note: '',
+      catagory: ''
     };
   }
 
@@ -22,21 +26,33 @@ export default class Expense extends Component {
           <View style={styles.firstView}>
           <NativeBaseProvider>
             <Stack style={{marginLeft: 95, marginTop: 10}} space={4} w="60%">
-            <TextArea  h={10} placeholder="Date here..." />
+            <TextArea 
+             value={this.state.dates}
+             onChangeText={(dates) => this.setState({ dates })}
+            h={10} placeholder="Date here..." />
             </Stack>
 
             <View style={styles.balanceBox}>
               <Stack style={{marginLeft: 5, marginTop: 10}} space={4} w="96%">
-                <TextArea  h={20} placeholder="Amount..." />
+                <TextArea
+                 value={this.state.amount}
+                 onChangeText={(amount) => this.setState({ amount })}
+                h={20} placeholder="Amount..." />
               </Stack>
             </View>
 
             <Stack style={{marginLeft: 9, marginTop: 20}} space={4} w="96%">
-                <TextArea  h={150} placeholder="Keep note here..." />
+                <TextArea
+                 value={this.state.note}
+                 onChangeText={(note) => this.setState({ note })}
+                h={150} placeholder="Keep note here..." />
             </Stack>
 
             <Stack style={{marginLeft: 9, marginTop: 20}} space={4} w="96%">
-                <TextArea  h={10} placeholder="Catagory like clothes, bills, communications, eating out etc.." />
+                <TextArea
+                value={this.state.catagory}
+                onChangeText={(catagory) => this.setState({ catagory })}
+                h={10} placeholder="Catagory like clothes, bills, communications, eating out etc.." />
             </Stack>
 
 
@@ -51,7 +67,22 @@ export default class Expense extends Component {
                 variant="outline"
                 colorScheme="secondary"
                 onPress={()=>{
-                  
+                  fetch('http://192.168.1.103:9000/expense', {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      dates: this.state.dates,
+                      amount: this.state.amount,
+                      note: this.state.note,
+                      catagory: this.state.catagory
+                    })
+                    
+                  })
+                    .then((response) => response.json())
+                    .then((json) => console.log(json));
               }}
               >
                 EXPENSE
