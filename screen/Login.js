@@ -14,11 +14,7 @@ export default class App extends Component {
       password: '',
     };
   }
-
-  abc() {
-    console.log('hi')
-  }
-
+  
   saveLogin() {
     fetch('http://localhost:9000/expense/', {
   method: 'POST',
@@ -45,12 +41,8 @@ export default class App extends Component {
            }
  
   }
-  
-  /* onLogin() {
-    const { username, password } = this.state;
 
-    Alert.alert('Credentials', `${username} + ${password}`);
-  } */
+
 
   render() {
     return (      
@@ -84,23 +76,7 @@ export default class App extends Component {
                 size="lg"
                /*  variant="outline" */
                 colorScheme="primary"
-                onPress={()=>{
-                  fetch('http://192.168.1.103:9000/user', {
-                    method: 'POST',
-                    headers: {
-                      Accept: 'application/json',
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                      email: this.state.email,
-                      name: this.state.username,
-                      password: this.state.password,
-                    })
-                    
-                  })
-                    .then((response) => response.json())
-                    .then((json) => console.log(json));
-                  
+                onPress={()=>{          
                   this.props.navigation.replace('Dashboard')
               }}
               >

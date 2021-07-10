@@ -27,7 +27,6 @@ export default class  extends Component {
   getTotalBalance() {
     var balanceTot = this.state.income - this.state.expense
     console.log(this.state.income)
-    console.log('hi')
   }
 
   getTotalIncome() {
