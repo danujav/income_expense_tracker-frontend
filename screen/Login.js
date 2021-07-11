@@ -40,7 +40,7 @@ export default class App extends Component {
           this.props.navigation.replace('Dashboard')
           return true
         } else {
-          alert('password does not match..!')
+          
           
         }
       } 
@@ -52,7 +52,7 @@ export default class App extends Component {
   storeData = async (value) => {
     try {
       await AsyncStorage.setItem('isAlreadyLoged', 'true')
-      console.log('data saved')
+      /* console.log('data saved') */
     } catch (e) {
       // saving error
     }
