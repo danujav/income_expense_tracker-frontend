@@ -3,34 +3,20 @@ import React, { Component } from 'react';
 import { Text, Alert, View, StyleSheet, Image } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { TextArea, Stack, Center, NativeBaseProvider, Button } from "native-base"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.getData()
     
     this.state = {
       email: '',
-      username: '',
-      password: '',
+      password: ''
     };
   }
-  
-  saveLogin() {
-    fetch('http://localhost:9000/expense/', {
-  method: 'POST',
-  body: JSON.stringify({
-    email: this.state.email,
-    name: this.state.name,
-    password: this.state.password,
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
-  .then((response) => response.json())
-  .then((json) => console.log(json));
-  }
 
+ 
   go = () => {
            const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (reg.test(this.state.email) === true){
@@ -42,7 +28,48 @@ export default class App extends Component {
  
   }
 
+  checkUserAvailable(email, password) {
+    fetch('http://192.168.1.103:9000/user')
+    .then((response) => response.json())
+    .then((json) => this.checkEquality(email, password, json));
+  }
+  checkEquality(email, password, json) {
+    for(let i = 0; i < json.length; i++) {
+      if(json[i].email == email) {
+        if(json[i].password == password) {
+          this.props.navigation.replace('Dashboard')
+          return true
+        } else {
+          alert('password does not match..!')
+          
+        }
+      } 
+    }
+    alert('email is not valid..!')
+    
+  }
 
+  storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('isAlreadyLoged', 'true')
+      console.log('data saved')
+    } catch (e) {
+      // saving error
+    }
+  }
+
+ getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('isAlreadyLoged')
+      if(value !== null) {
+        // value previously stored
+        this.props.navigation.replace('Dashboard')
+      }
+    } catch(e) {
+      // error reading value
+    }
+  }
+  
 
   render() {
     return (      
@@ -76,8 +103,15 @@ export default class App extends Component {
                 size="lg"
                /*  variant="outline" */
                 colorScheme="primary"
-                onPress={()=>{          
-                  this.props.navigation.replace('Dashboard')
+                onPress={()=>{     
+                  
+                  
+                  /* this.props.navigation.replace('Dashboard') */
+                  this.checkUserAvailable(this.state.email, this.state.password)
+                  this.storeData()
+                  
+                
+                
               }}
               >
                 Log in
